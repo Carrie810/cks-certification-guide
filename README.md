@@ -11,6 +11,9 @@ To pass the exam, candidates need to achieve a score of at least 66%.
 The exam will be on Kubernetes version 1.31.
 Once the certificate is earned, the CKS certification remains valid for 2 years. The cost to take the exam is $395 USD.
 
+## Exam UI
+https://docs.linuxfoundation.org/tc-docs/certification/lf-handbook2/exam-user-interface/examui-performance-based-exams
+
 ## Table of Contents
 [Domains & Competencies](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/#)
 
@@ -108,8 +111,10 @@ spec:
 ./kube-bench --config-dir /root/cfg --config /root/cfg/config.yaml --check 1.4.1
 
 # configuration of etcd
-ps aux | grep etcd
-/var/lib/etcd
+etcd is running as static pod - sudo vi /etc/kubernetes/manifests/etcd.yaml 
+ps aux | grep kubelet
+/var/lib/kubelet/config.yaml
+
 ```
 
 ### Secure the Ingress with TLS
@@ -324,8 +329,18 @@ k exec test-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 ## 3. System Hardening (10%)
 ### Disable Service
 ```bash
+# List all active services
+systemctl list-units --type=service --state=running
+
+# List services enabled to start at boot
+systemctl list-unit-files --type=service | grep enabled
+
 # Stop a running service
 systemctl stop vsftpd
+systemctl disable service_name
+
+# Mask it completely (prevents even manual starting)
+sudo systemctl mask <service-name>
 
 # Check the status of the service
 systemctl status vsftpd
@@ -339,10 +354,13 @@ sudo apt remove vsftpd
 ```bash
 # Identify open ports and related processes
 ss -tlpn
+ss -tuln
+nestat -tuln
 
 # Filter a process using the open port number
 ss -tlpn | grep :80
 
+# Find process listening on specific port
 # List the Open files for the Port and the Process IDs
 lsof -i :80
 
