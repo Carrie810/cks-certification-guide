@@ -373,6 +373,28 @@ kill 12345
 # Remove the packege
 rm /usr/bin/app01
 ```
+### 
+```
+kubectl exec -n legacy insecure-app -- ss -lntp
+kubectl exec -n legacy insecure-app -- ps aux
+kubectl exec -n legacy insecure-app -- pkill -f ftp
+```
+### Using least-privilege identity and access management
+```
+gpasswd -d alice docker
+deluser alice docker
+groups alice
+grep '^docker:' /etc/group
+getent group docker
+id vagrant
+groups alice
+
+file permission
+Permissions breakdown:
+rw- (owner read/write)
+rw- (group read/write)
+r-- (others read only)
+```
 
 ### Kernel Hardening using AppArmor
 >[Restrict container access to resources](https://kubernetes.io/docs/tutorials/security/apparmor/) : Minimize the container access to reduce the access to the host resources.
