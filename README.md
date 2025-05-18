@@ -1,4 +1,4 @@
-# Ultimate Certified Kubernetes Security Specialist (CKS) Preparation Guide - V1.31 (2025)
+# Ultimate Certified Kubernetes Security Specialist (CKS) Preparation Guide - V1.32 (2025)
 
 ## Hit the Star! :star:
 
@@ -11,15 +11,8 @@ To pass the exam, candidates need to achieve a score of at least 66%.
 The exam will be on Kubernetes version 1.31.
 Once the certificate is earned, the CKS certification remains valid for 2 years. The cost to take the exam is $395 USD.
 
-## CKS Exam Coupon (30% Off Exclusive Discount)
-
-> **CKA Price Update:** The CKS exam price will increase to $435 in January 2025. Take advantage of the current discount and complete the exam within 12 months to maximize your savings.
-
-To save on CKS exam registration, use the following coupon code.
-
-**Coupon:** Use code **DCUBE30** at [kube.promo/cks](https://kube.promo/cks)
-
 ## Table of Contents
+[Domains & Competencies](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/#)
 
 1. [Cluster Setup (15%)](#)
    - [Use Network security policies to restrict cluster level access](#)
@@ -83,7 +76,7 @@ spec:
   - Ingress
   - Egress
 ```
-### Protecting Metadata Server access to the cloud provider Kubernetes cluster using Network Policy
+~~### Protecting Metadata Server access to the cloud provider Kubernetes cluster using Network Policy~~
 > [Network Policy](https://kubernetes.io/docs/concepts/services-networking/network-policies/)  : Understand the IP Block parameter in the Network Policy.
 ```yaml
 # Create a Network Policy with the IP Block
@@ -103,7 +96,8 @@ spec:
         except:
         - 169.254.169.254/32
 ```
-### CIS Benchmark to analyze the cluster components
+### Use CIS benchmark to review the security configuration of Kubernetes components (etcd, kubelet, kubedns, kubeapi)
+## CIS Benchmark to analyze the cluster components
 > [CIS Benchmark]() : Analyze the cluster components using CIS Benchmark tool Kube Bench.
 ```bash
 # CIS Benchmark Best Practices
@@ -112,6 +106,10 @@ spec:
 ```bash
 # Analyze the benchmark of specific check
 ./kube-bench --config-dir /root/cfg --config /root/cfg/config.yaml --check 1.4.1
+
+# configuration of etcd
+ps aux | grep etcd
+/var/lib/etcd
 ```
 
 ### Secure the Ingress with TLS
@@ -157,6 +155,10 @@ spec:
             name: backend
             port:
               number: 80
+```
+### Verify platform binaries before deploying
+```bash
+--enable-admission-plugins=...,NodeRestriction,...
 ```
 ### Verify Kubernetes Platform Binaries before deploying
 
