@@ -439,6 +439,21 @@ spec:
 ```
 > Note: The profiles should be present in the worker nodes or where the workloads should be in.
 
+## Seccomp profile
+# Location of Seccomp Profile on Host
+```
+/var/lib/kubelet/seccomp/profiles/audit.json
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/audit.json
+```
+Common CKS Pitfalls to Avoid
+❌ Wrong path like /etc/seccomp → Kubelet won’t find it.
+❌ Not copying the file to all nodes → pods may fail on non-primary nodes.
+❌ Invalid JSON in profile → pod will fail to start.
+
 ## 4. Minimize Microservice Vulnerabilities (20%)
 ### Run Container as Non-Root User 
 > [Security context to enable non-root containers](https://kubernetes.io/docs/concepts/security/pod-security-standards/) : Understand how to run a container with a non-root user.
