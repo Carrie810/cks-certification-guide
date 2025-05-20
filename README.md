@@ -13,6 +13,11 @@ Once the certificate is earned, the CKS certification remains valid for 2 years.
 
 ## Exam UI
 https://docs.linuxfoundation.org/tc-docs/certification/lf-handbook2/exam-user-interface/examui-performance-based-exams
+Notepad
+Use Application->Accessories->Mousepad to write down notes for yourself during the exam.
+VSCodium
+You can use VSCodium to edit files and you can also use its terminal to run commands.
+You're not allowed to install any VSCodium extensions.
 
 ## Table of Contents
 [Domains & Competencies](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/#)
@@ -699,6 +704,12 @@ kubesec scan pod.yaml
 # Scan using Kubesec docker image
 docker run -i kubesec/kubesec:512c5e0 scan /dev/stdin > pod.yaml
 ```
+
+### kube-linter
+```
+kube-linter lint nginx-pod.yaml
+```
+
 ### Generate Software Bills of Materials (SBOMs) using bom
 > [bom](https://github.com/kubernetes-sigs/bom) :
 Scan the container image using bom to generate SBOM.
