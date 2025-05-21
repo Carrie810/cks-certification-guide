@@ -621,6 +621,13 @@ spec:
         io.kubernetes.pod.namespace: backend
         run: b-pod-1
 ```
+## mTLS
+https://docs.cilium.io/en/latest/network/servicemesh/mutual-authentication/mutual-authentication-example/
+```
+authentication:
+    mode: "required"
+```
+
 ## 5. Supply Chain Security (20%)
 
 ### Image Digest to run a Pod
